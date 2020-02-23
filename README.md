@@ -339,3 +339,30 @@ T_of_H(3,"A","B","C")
 ```octave
 
 ```
+
+
+# Chess Board
+
+```octave
+%function Bcell = BlackCell (pixel)
+%  Bcell(1:pixel,1:pixel,1)=0
+%end
+clc
+clear all
+function Wcell = WhiteCell 
+  Wcell=200;
+end
+
+pixel=input("Enter cell Size interms of Pixels (e.g. -> 50) : ")
+board(1:8*pixel,1:8*pixel,1)=0;
+for i=1:pixel+1:8*pixel
+  for j = 1:pixel+1:8*pixel+1
+    if( mod(i+j,2)==1)
+      board(i:i+pixel,j:j+pixel,1) = WhiteCell();
+    endif
+  endfor #inner
+endfor #outer
+
+imshow(board)
+
+```
