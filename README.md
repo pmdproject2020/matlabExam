@@ -366,3 +366,65 @@ endfor #outer
 imshow(board)
 
 ```
+
+---
+
+# Replace old expression with new expression
+---
+```octave
+close all
+clc
+clear all
+
+function [file, count_replaced]= replace(filename,expr)
+  outFile=input("Output File name : ",'s');
+  npat=input('Enter new pattern= ','s');
+  len_of_expr=length(expr);
+  len_of_npat=length(npat);
+  fout = fopen(outFile,'w');
+  fin = fopen(filename,'r');
+  count_replaced=0;
+  while ~feof(fin)
+    ch=fscanf(fin,"%c",1);
+    if upper(ch)==upper(expr(1))
+      flag=1;
+      for i=2:len_of_expr
+        ch=fscanf(fin,"%c",1);
+        if upper(ch)!=upper(expr(i))
+          flag=0;
+          break
+        endif
+      endfor
+      #now if flag == 1 then it implies
+      #expression has matched
+      #now we have to replace the old expr with the new one
+      if flag == 1
+        count_replaced+=1;
+        for i=1:len_of_npat
+          fprintf(fout,"%c",npat(i));
+        endfor
+      else
+        #not matched but we are already ahead of the place from where 
+        #we have to read the char and read it into the 2nd file
+        fseek(fin,-i,0);
+        for j=1:i
+          ch=fscanf(fin,"%c",1) ;#read the old expr
+          fprintf(fout,"%c",ch) ;  # and print it XD
+        endfor
+      endif
+    else
+      fprintf(fout,"%c",ch);
+    endif
+  endwhile
+  file=fout;
+  fclose("all")
+endfunction
+
+inFile=input("Input File name : ",'s');
+opat=input("Enter old pattern= ",'s');
+
+[file,count_r] = replace(inFile,opat)
+
+```
+
+---
