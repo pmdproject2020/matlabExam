@@ -1,0 +1,223 @@
+<h1 id="assignment-2-progs">Assignment 2 progs :</h1>
+<hr />
+<blockquote>
+<p>Q1. Write a menu driven program to sort a list using the following methods: Menu for Sorting Methods 1. Bubble Sort Method 2. Insertion Sort Method 3. Quit</p>
+</blockquote>
+<blockquote>
+<p>Your Choice :1/2/3 -&gt;</p>
+</blockquote>
+<h2 id="answer">## Answer :</h2>
+<blockquote>
+<p>structure of the prog</p>
+</blockquote>
+<h2 id="swap-function">swap function</h2>
+<pre class="sourceCode octave"><code class="sourceCode octave">function [x,y]=<span class="fu">swap</span>(a,b)
+  x=b;
+  y=a;
+endfunction</code></pre>
+<h2 id="bubble-sort">Bubble sort</h2>
+<pre class="sourceCode octave"><code class="sourceCode octave">function arr=bubble_sort(a,n)
+   sc=<span class="fl">0</span>;
+  for <span class="bn">i</span>=<span class="fl">1</span>:n
+    for <span class="bn">j</span>=<span class="fl">1</span>:n-<span class="fl">1</span>
+      if (a(<span class="bn">j</span>) &gt; a(<span class="bn">j</span>+<span class="fl">1</span>))
+        sc=sc+<span class="fl">1</span>;
+        <span class="fu">disp</span>([<span class="st">&quot;\nswapped =&gt;  &quot;</span> , <span class="fu">num2str</span>(sc) ,<span class="st">&quot;\n&quot;</span>])
+        [ a(<span class="bn">j</span>) , a(<span class="bn">j</span>+<span class="fl">1</span>) ] = <span class="fu">swap</span>( a(<span class="bn">j</span>), a(<span class="bn">j</span>+<span class="fl">1</span>) );
+        a  <span class="co">#to print the array</span>
+      endif
+    endfor <span class="co">#inner</span>
+  endfor <span class="co">#outter</span>
+  arr=a;
+ endfunction </code></pre>
+<h2 id="insertion-sort"># Insertion Sort</h2>
+<pre class="sourceCode octave"><code class="sourceCode octave">
+function arr=insertion_sort(a,n)
+   <span class="co">#sc=0;</span>
+  for <span class="bn">i</span>=<span class="fl">1</span>:n
+    <span class="bn">j</span>=<span class="bn">i</span>;
+    while(<span class="bn">j</span>&gt;<span class="fl">1</span> &amp;&amp; a(<span class="bn">j</span>) &lt; a(<span class="bn">j</span>-<span class="fl">1</span>))
+      <span class="co">#disp(&quot;swapped&quot;)</span>
+      [ a(<span class="bn">j</span>) , a(<span class="bn">j</span>-<span class="fl">1</span>) ] = <span class="fu">swap</span>( a(<span class="bn">j</span>) , a(<span class="bn">j</span>-<span class="fl">1</span>) );
+      a
+      <span class="bn">j</span>--;
+    endwhile  
+  endfor <span class="co">#outter</span>
+  arr=a;
+endfunction</code></pre>
+<h2 id="insertion-sort-1"># Insertion Sort</h2>
+<blockquote>
+<p>logic</p>
+</blockquote>
+<pre><code>arr[] = 64 25 12 22 11
+
+// Find the minimum element in arr[0...4]
+// and place it at beginning
+11 25 12 22 64
+
+// Find the minimum element in arr[1...4]
+// and place it at beginning of arr[1...4]
+11 12 25 22 64
+
+// Find the minimum element in arr[2...4]
+// and place it at beginning of arr[2...4]
+11 12 22 25 64
+
+// Find the minimum element in arr[3...4]
+// and place it at beginning of arr[3...4]
+11 12 22 25 64 </code></pre>
+<hr />
+<h2 id="function">&gt;Function</h2>
+<pre class="sourceCode octave"><code class="sourceCode octave">
+function sorted_arr=selection_sort(a,n)
+  for <span class="bn">i</span>=<span class="fl">1</span>:n
+    min_indx=<span class="bn">i</span>;
+    for <span class="bn">j</span>=<span class="bn">i</span>+<span class="fl">1</span>:n
+      if(a(<span class="bn">j</span>)&lt;a(min_indx))
+        min_indx=<span class="bn">j</span>;
+      endif
+    end <span class="co">#inner for</span>
+    [a(<span class="bn">i</span>) , a(min_indx)] = <span class="fu">swap</span>(a(<span class="bn">i</span>) , a(min_indx))
+  end <span class="co">#outer for</span>
+  sorted_arr=a;
+endfunction</code></pre>
+<hr />
+<h2 id="binary-search">Binary search</h2>
+<pre class="sourceCode octave"><code class="sourceCode octave">function indx = binSrc ( ar , ele)
+  l=<span class="fl">1</span>;
+  r=<span class="fu">numel</span>(ar); <span class="co">#no of element</span>
+  indx=-<span class="fl">9</span>;
+  while(l &lt; r)
+      mid=<span class="fu">floor</span>((l+r)/<span class="fl">2</span>)
+      if(ar(mid)==ele)
+        indx=mid
+        break
+      elseif(ar(mid) &gt; ele)
+        r=mid;
+      else
+        l=mid+<span class="fl">1</span>;
+      end
+  endwhile
+endfunction</code></pre>
+<h1 id="function-to-get-user-input">function to get user input</h1>
+<h2 id="and-store-them-into-an-array">### and store them into an Array</h2>
+<pre class="sourceCode octave"><code class="sourceCode octave">function [arr,noe]=getInp
+  noe= <span class="fu">input</span>(<span class="st">&quot;\nHow many elements do u wanna store : &quot;</span>);
+  <span class="fu">disp</span>(<span class="st">&quot;\n&quot;</span>)
+  for <span class="bn">i</span>=<span class="fl">1</span>:noe
+    <span class="fu">disp</span>([<span class="fu">num2str</span>(<span class="bn">i</span>),<span class="st">&quot; : &quot;</span>]);
+    A(<span class="bn">i</span>)=<span class="fu">input</span>(<span class="st">&#39;val : &#39;</span>);
+  end
+  arr=A;
+end</code></pre>
+<h2 id="xd-this-is-one-liner">&gt; XD , this is one liner</h2>
+<h1 id="menu-function">Menu function</h1>
+<h2 id="it-returns-the-choice">### it returns the choice</h2>
+<pre class="sourceCode octave"><code class="sourceCode octave">function choice=<span class="fu">menu</span>
+    display([
+        <span class="st">&quot;\n\t1. Bubble Sort  &quot;</span>,
+        <span class="st">&quot;\n\t2. Insertion Sort  &quot;</span>,
+        <span class="st">&quot;\n\t3. Quit  &quot;</span>
+    ])
+    choice=<span class="fu">input</span>(<span class="st">&quot;\n\tYour Choice : &quot;</span>);
+ end</code></pre>
+<hr />
+<h2 id="main-function">## Main function</h2>
+<pre class="sourceCode octave"><code class="sourceCode octave">function main_fun(choice)
+    
+    switch (choice)
+    case <span class="fl">1</span>
+        display(<span class="st">&quot;\nin case 1&quot;</span>)
+        [a,n]=getInp()
+        v=bubble_sort(a,n);
+        <span class="fu">disp</span>([<span class="st">&quot;\nfinal array : \n&quot;</span>,<span class="fu">num2str</span>(v),<span class="st">&quot;\n&quot;</span>]);
+    case <span class="fl">2</span>
+        display(<span class="st">&quot;\nin case 2&quot;</span>)
+        [a,n]=getInp()
+        v=insertion_sort(a,n);
+        <span class="fu">disp</span>([<span class="st">&quot;\nfinal array : \n&quot;</span>,<span class="fu">num2str</span>(v),<span class="st">&quot;\n&quot;</span>]);
+    case <span class="fl">3</span>
+        <span class="fu">exit</span>
+    end
+endfunction</code></pre>
+<h1 id="recursive-functions">Recursive Functions</h1>
+<ul>
+<li>sum of n (1-200) numbers</li>
+<li>product of n numbers</li>
+<li>N-th Fibonacci no</li>
+<li>Tower of Hanoi</li>
+</ul>
+<h2 id="sum-of-n-numbers"># sum of n numbers</h2>
+<p><code>octave function s = sumN(n)     if(n&lt;0)       s=0;       return     end     s=n+sumN(n-1); endfunction</code> --- # Product of N num</p>
+<pre class="sourceCode octave"><code class="sourceCode octave">function p = prodN_v1(n)
+    if( n==<span class="fl">0</span>)
+      p=<span class="fl">0</span>;
+      return
+    elseif (n==<span class="fl">1</span>)
+      p=<span class="fl">1</span>;
+      return
+    end
+   p=n*prodN_v1(n-<span class="fl">1</span>);
+endfunction</code></pre>
+<ul>
+<li><p><strong>Code</strong></p>
+<pre class="sourceCode octave"><code class="sourceCode octave">function term= fib (n)
+  if(n&lt;=<span class="fl">0</span>)
+    term = <span class="fl">0</span>;
+    return
+  end
+  if (n==<span class="fl">1</span> || n==<span class="fl">2</span>)
+    term=<span class="fl">1</span>;
+    return
+  end
+  term = fib(n-<span class="fl">1</span>) + fib(n-<span class="fl">2</span>); 
+endfunction </code></pre>
+<hr />
+<blockquote>
+<p>example</p>
+</blockquote>
+<pre><code> fib( 6 )
+ ans = 8</code></pre></li>
+</ul>
+<h2 id="tower-of-hanoi"># Tower of Hanoi</h2>
+<pre><code>Take an example for 2 disks :
+Let rod 1 = &#39;A&#39;, rod 2 = &#39;B&#39;, rod 3 = &#39;C&#39;.
+
+Step 1 : Shift first disk from &#39;A&#39; to &#39;B&#39;.
+Step 2 : Shift second disk from &#39;A&#39; to &#39;C&#39;.
+Step 3 : Shift first disk from &#39;B&#39; to &#39;C&#39;.
+
+The pattern here is :
+Shift &#39;n-1&#39; disks from &#39;A&#39; to &#39;B&#39;.
+Shift last disk from &#39;A&#39; to &#39;C&#39;.
+Shift &#39;n-1&#39; disks from &#39;B&#39; to &#39;C&#39;.</code></pre>
+<h2 id="example">&gt; Example</h2>
+<pre><code>Input : 2
+Output : Disk 1 moved from A to B
+         Disk 2 moved from A to C
+         Disk 1 moved from B to C
+
+Input : 3
+Output : Disk 1 moved from A to C
+         Disk 2 moved from A to B
+         Disk 1 moved from C to B
+         Disk 3 moved from A to C
+         Disk 1 moved from B to A
+         Disk 2 moved from B to C
+         Disk 1 moved from A to C</code></pre>
+<hr />
+<h2 id="code"><strong>Code</strong></h2>
+<hr />
+<pre class="sourceCode octave"><code class="sourceCode octave"><span class="fu">clc</span>
+<span class="fu">clear</span> <span class="fu">all</span>
+function T_of_H(n,A,B,C)
+
+  if n &gt; <span class="fl">0</span>
+    T_of_H(n-<span class="fl">1</span>,A,C,B)
+    <span class="fu">fprintf</span>(<span class="st">&quot;\nMove disk %d from %s to %s \n&quot;</span>,n,A,C)
+    T_of_H(n-<span class="fl">1</span>,B,C,A)
+  end
+end
+
+T_of_H(<span class="fl">3</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)</code></pre>
+<pre class="sourceCode octave"><code class="sourceCode octave"></code></pre>
