@@ -428,3 +428,34 @@ opat=input("Enter old pattern= ",'s');
 ```
 
 ---
+>Perfect number
+---
+```
+In number theory, a perfect number is a positive integer that is equal to the sum of its positive divisors, excluding the number itself. For instance, 6 has divisors 1, 2 and 3, and 1 + 2 + 3 = 6, so 6 is a perfect number.
+```
+---
+### code
+---
+```octave
+#wap to print perfect no < 9999
+clear all
+close all
+clc
+function answer = isPerfectNum( no)
+  s=0;
+  for i = 1:no-1
+    if ~mod( no , i)
+      s+=i;
+    endif
+  endfor
+  answer = (s==no);
+endfunction
+
+r= input("Enter n : " );
+for i = 1:r
+  if(isPerfectNum(i))
+    fprintf("\n %d\n" , i)
+  endif
+end
+
+```
