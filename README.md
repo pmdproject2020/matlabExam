@@ -459,3 +459,48 @@ for i = 1:r
 end
 
 ```
+
+---
+### Write a program to extract all words from given text file
+### and store in another file. 
+### Sort the words in file in alphabetical order. 
+### Input any word and search the word file.
+### If it found print how many times it is found
+### and if it is not found then print “NOT FOUND”.
+
+---
+
+```octave
+clc;
+clear all;
+close all;
+file1=input('Enter Input filename:    ','s');
+file2=input('Enter Output Filename:   ','s');
+fp1=fopen(file1,'r');
+fp2=fopen(file2,'w');
+fseek(fp1,0,-1);
+s="";
+a=[];
+count_word=0;
+while ~feof(fp1)
+  flag=0;
+  while (ch=fscanf(fp1,"%c",1)) != double(" ")
+    if ch==double("\n")
+      flag=1;
+      break
+    endif
+    char(ch);
+    s=strcat(s,char(ch));
+    flag=1;
+  endwhile #inner
+  if flag==1
+    s
+    ++count_word;
+   fprintf(fp2,"%s\n",s);
+    s="";
+  endif
+endwhile
+count_word
+fclose('all');
+```
+---
