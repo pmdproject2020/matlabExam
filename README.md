@@ -504,3 +504,89 @@ count_word
 fclose('all');
 ```
 ---
+
+# Merge Sort
+
+---
+```octave
+function [y]=mergesort(a)
+  n=length(a);
+  if n<2
+    y=a(1:n);
+    return ;
+  endif
+  n_2=int32(n/2);
+  a1=mergesort(a(1:n_2));
+  a2=mergesort(a(n_2+1:n));
+  
+  n1=length(a1);
+  n2=length(a2);
+  
+  count_a1=1;
+  count_a2=1;
+  y=[];
+  
+  while(count_a1<=n1)
+    if count_a2>n2
+      y=[y a1(count_a1)];
+      count_a1=count_a1+1;
+      continue;
+    endif
+    if a1(count_a1)<a2(count_a2)
+      y = [y a1(count_a1)];
+      count_a1 = count_a1+1;
+    else
+      y = [y a2(count_a2)];
+      count_a2 = count_a2+1;
+    endif
+  endwhile
+  
+  for j=count_a2:n2
+    y=[y a2(j)];
+  endfor
+endfunction
+```
+---
+
+# Remove Comments
+
+```octave
+%Write a program to remove all comment lines from any Matlab  source code. 
+clc;
+clear all;
+close all;
+file1=input('Enter a Matlab File name   ','s');
+file2=input('Enter Output File name     ','s');  
+fp1=fopen(file1,'r');
+fp2=fopen(file2,'w');
+fseek(fp1,0,1);
+n=ftell(fp1);
+fseek(fp1,0,-1);
+nc=0;
+while ~feof(fp1)
+  ch=fscanf(fp1,'%c',1);
+  if ch==char(39)
+    fprintf(fp2,'%c',ch);
+    while ch~=char(39)
+      fprintf(fp2,'%c',ch);
+      ch=fscanf(fp1,'%c',1);
+    endwhile
+    fprintf(fp2,'%c',ch);
+  elseif ch=='%'
+    nc=nc+1;
+    ch=fscanf(fp1,'%c',1);
+    while ch~=char(10)
+      ch=fscanf(fp1,'%c',1);
+    endwhile
+  else
+    fprintf(fp2,'%c',ch);
+  endif
+endwhile
+disp(fp2);
+fprintf('\n  %d  ',nc);
+fclose('all'); 
+
+```
+
+---
+
